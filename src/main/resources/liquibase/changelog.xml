@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="create_jooqtry_schema" author="me">
+        <sql dbms="postgresql" endDelimiter=";">
+            CREATE SCHEMA IF NOT EXISTS jooqtry
+        </sql>
+    </changeSet>
+
+    <changeSet id="create_blogs" author="me">
+        <createTable tableName="blogs" schemaName="jooqtry">
+            <column name="id" type="int">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="author" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date_published" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date_edited" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="text" type="clob">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="blogs_addAutoIncrement" author="me">
+        <addAutoIncrement columnDataType="int"
+                          columnName="id"
+                          defaultOnNull="false"
+                          generationType="ALWAYS"
+                          incrementBy="1"
+                          schemaName="jooqtry"
+                          startWith="1"
+                          tableName="blogs"/>
+    </changeSet>
+
+</databaseChangeLog>
